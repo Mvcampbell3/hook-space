@@ -1,26 +1,47 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Header />
+      <LeftSide />
+      <RightSide />
+      <Footer />
     </div>
   );
+}
+
+const Header = props => {
+  return (
+    <header>
+      <h1 className="brand">Rover Pics</h1>
+    </header>
+  )
+}
+
+const LeftSide = props => {
+  return (
+    <div className="leftSide">
+      <h3>{process.env.REACT_APP_API_KEY}</h3>
+    </div>
+  )
+}
+
+const RightSide = props => {
+  return (
+    <div className="rightSide">
+
+    </div>
+  )
+}
+
+const Footer = props => {
+  return (
+    <footer>
+      Michael Campbell
+    </footer>
+  )
 }
 
 export default App;
