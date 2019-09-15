@@ -35,12 +35,7 @@ const LeftSide = props => {
             props.setGetManifest(true);
           }}
           className={props.rover === "spirit" ? "roverBtn selected" : "roverBtn"}>Spirit</button>
-        <button
-          onClick={() => {
-            props.setRover("curiosity");
-            props.setGetManifest(true);
-          }}
-          className={props.rover === "curiosity" ? "roverBtn selected" : "roverBtn"}>Curiosity</button>
+        
       </div>
 
       {props.manifest ? <div>

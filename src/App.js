@@ -48,7 +48,6 @@ const App = props => {
       fetch(url)
         .then(response => response.json())
         .then(info => {
-          console.log(info.photos)
           setPics(info.photos);
           setGetPics(false);
         })
@@ -63,7 +62,6 @@ const App = props => {
       fetch(url)
         .then(response => response.json())
         .then(fetchedManifest => {
-          console.log(fetchedManifest.photo_manifest);
           setManifest(fetchedManifest.photo_manifest)
           setGetManifest(false)
         })
@@ -75,7 +73,6 @@ const App = props => {
     if (sol && manifest) {
       const rightSol = manifest.photos.filter(each => each.sol.toString() === sol);
       if (rightSol.length > 0) {
-        console.log(rightSol[0].cameras)
         setCameras(rightSol[0].cameras);
       }
 

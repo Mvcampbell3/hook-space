@@ -15,8 +15,8 @@ const RightSide = props => {
   const [play, setPlay] = useState(false);
 
   useEffect(() => {
-    console.log(pics.length)
     if (pics.length > 0) {
+      console.log("Loading Pictures")
       setLoaded(loaded => loaded = 0);
       setStash(stash => [])
       console.log("have pics")
@@ -27,7 +27,6 @@ const RightSide = props => {
         newImage.src = picture.img_src;
         newImage.id = picture.id
         newImage.onload = () => {
-          console.log("loaded " + i);
           setLoaded(loaded => loaded + 1);
           setStash(stash => [...stash, newImage])
         }
