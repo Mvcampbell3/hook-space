@@ -62,6 +62,8 @@ const App = props => {
       setPics([])
       setSol("")
       setManifest(null);
+      setFlipBook(false);
+      setRegDisplay(false);
       let url = `https://api.nasa.gov/mars-photos/api/v1/manifests/${rover}?api_key=${process.env.REACT_APP_API_KEY}`;
       fetch(url)
         .then(response => response.json())
@@ -74,6 +76,9 @@ const App = props => {
 
   useEffect(() => {
     setCameras([]);
+    setSelectedCamera(null);
+    setFlipBook(false);
+    setRegDisplay(false);
     if (sol && manifest) {
       const rightSol = manifest.photos.filter(each => each.sol.toString() === sol);
       if (rightSol.length > 0) {
