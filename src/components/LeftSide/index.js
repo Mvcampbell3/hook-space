@@ -14,22 +14,20 @@ const LeftSide = props => {
             props.setRover("opportunity");
             props.setGetManifest(true);
           }}
-          className="roverBtn">Opportunity</button>
+          className={props.rover === "opportunity" ? "roverBtn selected": "roverBtn"}>Opportunity</button>
         <button
           onClick={() => {
             props.setRover("spirit");
             props.setGetManifest(true);
           }}
-          className="roverBtn">Spirit</button>
+          className={props.rover === "spirit" ? "roverBtn selected": "roverBtn"}>Spirit</button>
         <button
           onClick={() => {
             props.setRover("curiosity");
             props.setGetManifest(true);
           }}
-          className="roverBtn">Curiosity</button>
+          className={props.rover === "curiosity" ? "roverBtn selected": "roverBtn"}>Curiosity</button>
       </div>
-
-      <h5>{props.rover ? props.rover : "Select Rover"}</h5>
 
       {props.manifest ? <div>
         <h3>Max Sol: {props.manifest.max_sol}</h3>
@@ -38,8 +36,8 @@ const LeftSide = props => {
 
       {props.cameras.length > 0 ?
         <div>
-          <CameraButton key="allCamera" cam={"ALL"} setSelectedCamera={props.setSelectedCamera} />
-          {props.cameras.map((cam, i) => <CameraButton key={i} cam={cam} setSelectedCamera={props.setSelectedCamera} />)}
+          <CameraButton key="allCamera" cam={"ALL"} setSelectedCamera={props.setSelectedCamera} selectedCamera={props.selectedCamera} />
+          {props.cameras.map((cam, i) => <CameraButton key={i} cam={cam} setSelectedCamera={props.setSelectedCamera} selectedCamera={props.selectedCamera}/>)}
         </div> : <></>}
 
 

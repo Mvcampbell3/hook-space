@@ -96,6 +96,7 @@ const App = props => {
         setSol={setSol}
         cameras={cameras}
         setCameras={setCameras}
+        selectedCamera={selectedCamera}
         setSelectedCamera={setSelectedCamera}
         flipBook={flipBook}
         setFlipBook={setFlipBook}
