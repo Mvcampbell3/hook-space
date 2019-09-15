@@ -52,7 +52,7 @@ header, footer{
 
 /* ---------------------------------------------------- */
 
-.picHolder{
+.picRegHolder{
   display: grid;
   grid-template-columns: 300px 300px;
 }
@@ -60,4 +60,27 @@ header, footer{
 .roverPicture{
   width: 300px;
   height: auto;
+}
+
+.picFlipHolder{
+  position: relative;
+}
+
+.flipPic{
+  position: absolute;
+  height: 400px;
+  width: 400px;
+  z-index: 5;
+}
+
+.flipBlocker{
+  height: 400px;
+  width: 400px;
+  background-color: black;
+  position: absolute;
+  z-index: 10;
+}
+
+.flipControl{
+  transform: translateY(500px)
 }

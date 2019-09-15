@@ -108,6 +108,7 @@ const App = props => {
       <RightSide
         pics={pics}
         flipBook={flipBook}
+        regDisplay={regDisplay}
       />
       <Footer />
     </div>
