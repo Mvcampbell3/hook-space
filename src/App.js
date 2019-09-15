@@ -57,6 +57,10 @@ const App = props => {
   useEffect(() => {
     if (getManifest) {
       console.log("running http manifest")
+      setCameras([]);
+      setSelectedCamera(null)
+      setPics([])
+      setSol("")
       setManifest(null);
       let url = `https://api.nasa.gov/mars-photos/api/v1/manifests/${rover}?api_key=${process.env.REACT_APP_API_KEY}`;
       fetch(url)
@@ -78,6 +82,10 @@ const App = props => {
 
     }
   }, [sol, manifest])
+
+  useEffect(() => {
+    setPics([])
+  }, [selectedCamera])
 
   // Return Statement
 
