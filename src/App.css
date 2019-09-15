@@ -13,6 +13,18 @@
   background-color: rgb(94, 0, 0);
 }
 
+button{
+  padding: 2px 4px;
+  background-color: black;
+  color: white;
+  border: 1px darkred solid;
+  border-radius: 5px;
+}
+
+button:focus{
+  outline: none;
+}
+
 header, footer{
   grid-column-start: 1;
   grid-column-end: span 2;

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
+import LeftSide from "./components/LeftSide";
+
 const App = (props) => {
 
   const [pics, setPics] = useState([]);
@@ -9,11 +11,28 @@ const App = (props) => {
 
   const [rover, setRover] = useState(null);
 
+  const [manifest, setManifest] = useState(null);
+
+  const [getManifest, setGetManifest] = useState(false)
+
+  const [sol, setSol] = useState("")
+
+  const [cameras, setCameras] = useState([]);
+
+  const [selectedCamera, setSelectedCamera] = useState("all");
+
   useEffect(() => {
     if (getPics) {
-      console.log("running http")
-      let url = `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?sol=45&api_key=${process.env.REACT_APP_API_KEY}`
-      fetch(url)
+
+      console.log("running http pictures")
+
+      let urlCam = 
+      `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?sol=${sol}$camera=${selectedCamera}&api_key=${process.env.REACT_APP_API_KEY}`;
+
+      let urlAllCam = 
+      `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?sol=${sol}&api_key=${process.env.REACT_APP_API_KEY}`
+      
+      fetch(selectedCamera === "all" ? urlAllCam : urlCam)
         .then(response => response.json())
         .then(info => {
           console.log(info.photos)
@@ -21,17 +40,60 @@ const App = (props) => {
           setGetPics(false);
         })
     }
-  }, [getPics, rover])
+  }, [getPics, rover, sol, selectedCamera])
 
+  useEffect(() => {
+    if (getManifest) {
+      console.log("running http manifest")
+      setManifest(null);
+      let url = `https://api.nasa.gov/mars-photos/api/v1/manifests/${rover}?api_key=${process.env.REACT_APP_API_KEY}`;
+      fetch(url)
+        .then(response => response.json())
+        .then(fetchedManifest => {
+          console.log(fetchedManifest.photo_manifest);
+          setManifest(fetchedManifest.photo_manifest)
+          setGetManifest(false)
+        })
+    }
+  }, [rover, getManifest])
+
+  useEffect(() => {
+    setCameras([]);
+    if (sol && manifest) {
+      console.log(sol)
+      console.log(manifest.photos);
+      const rightSol = manifest.photos.filter(each => each.sol.toString() === sol);
+      if (rightSol.length > 0) {
+        console.log(rightSol[0].cameras)
+        setCameras(rightSol[0].cameras);
+      }
+      
+    }
+  }, [sol, manifest])
+
+  // --------------------------------------RETURN______________________________
   return (
     <div className="container">
       <Header />
-      <LeftSide rover={rover} setRover={setRover} setGetPics={setGetPics} getPics={getPics} />
+      <LeftSide
+        rover={rover}
+        setRover={setRover}
+        setGetPics={setGetPics}
+        getPics={getPics}
+        setGetManifest={setGetManifest}
+        manifest={manifest}
+        sol={sol}
+        setSol={setSol}
+        cameras={cameras}
+        setCameras={setCameras}
+      />
       <RightSide pics={pics} />
       <Footer />
     </div>
   );
 }
+
+//-----------------------------------------END RETURN___________________________
 
 const Header = props => {
   return (
@@ -41,25 +103,7 @@ const Header = props => {
   )
 }
 
-const LeftSide = props => {
 
-  return (
-    <div className="leftSide">
-      <h3>Get Rover Pictures</h3>
-
-      <div className="button-group">
-        <button onClick={() => { props.setRover("opportunity") }} className="roverBtn">Opportunity</button>
-        <button onClick={() => { props.setRover("spirit") }} className="roverBtn">Spirit</button>
-        <button onClick={() => { props.setRover("curiousity") }} className="roverBtn">Curiousity</button>
-      </div>
-
-      <h5>{props.rover ? props.rover : "Select Rover"}</h5>
-
-      <button onClick={() => { props.setGetPics(true) }} className="sendBtn">Send</button>
-      <h5>{props.getPics ? "true" : "false"}</h5>
-    </div>
-  )
-}
 
 const RightSide = props => {
 
@@ -75,17 +119,9 @@ const RightSide = props => {
 }
 
 const Picture = props => {
-  // const { camera, earth_date, id, img_src, rover, sol } = props.pic;
-
-
   return (
     <div className="picture">
-      {/* <h4>{camera.name}</h4> */}
-      {/* <h5>{earth_date}</h5> */}
-      {/* <h5>{id} id</h5> */}
       <img className="roverPicture" src={props.img_src} alt="rover" />
-      {/* <h5>{rover}</h5> */}
-      {/* <h5>{sol}</h5> */}
     </div>
   )
 }
