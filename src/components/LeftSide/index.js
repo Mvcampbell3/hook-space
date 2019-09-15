@@ -42,8 +42,10 @@ const LeftSide = props => {
           {props.cameras.map((cam, i) => <CameraButton key={i} cam={cam} setSelectedCamera={props.setSelectedCamera} />)}
         </div> : <></>}
 
+
+      <button onClick={() => props.setFlipBook(flipBook => flipBook = !flipBook)}>FlipBook</button>
       <button onClick={() => { props.setGetPics(true) }} className="sendBtn">Send</button>
-      <h5>{props.getPics ? "true" : "false"}</h5>
+      <h5>{props.flipBook ? "true" : "false"}</h5>
     </div>
   )
 }
