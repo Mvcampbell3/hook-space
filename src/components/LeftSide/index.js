@@ -1,5 +1,7 @@
 import React from "react";
 
+import CameraButton from "../CameraButton";
+
 const LeftSide = props => {
 
   return (
@@ -32,12 +34,13 @@ const LeftSide = props => {
       {props.manifest ? <div>
         <h3>Max Sol: {props.manifest.max_sol}</h3>
         <input type="number" name="sol" autoComplete="off" onChange={e => props.setSol(e.target.value)} value={props.sol} />
-      </div>: <></>}
+      </div> : <></>}
 
-      {props.cameras.length > 0 ? <div>
-        <h4>All</h4>
-        {props.cameras.map((cam, i) => <h4 key={`cam${i}`}>{cam}</h4>)}
-      </div> :<></>}
+      {props.cameras.length > 0 ?
+        <div>
+          <CameraButton key="allCamera" cam={"ALL"} setSelectedCamera={props.setSelectedCamera} />
+          {props.cameras.map((cam, i) => <CameraButton key={i} cam={cam} setSelectedCamera={props.setSelectedCamera} />)}
+        </div> : <></>}
 
       <button onClick={() => { props.setGetPics(true) }} className="sendBtn">Send</button>
       <h5>{props.getPics ? "true" : "false"}</h5>

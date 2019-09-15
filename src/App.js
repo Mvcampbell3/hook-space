@@ -19,20 +19,22 @@ const App = (props) => {
 
   const [cameras, setCameras] = useState([]);
 
-  const [selectedCamera, setSelectedCamera] = useState("all");
+  const [selectedCamera, setSelectedCamera] = useState(null);
 
   useEffect(() => {
     if (getPics) {
 
       console.log("running http pictures")
 
-      let urlCam = 
-      `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?sol=${sol}$camera=${selectedCamera}&api_key=${process.env.REACT_APP_API_KEY}`;
+      let url;
 
-      let urlAllCam = 
-      `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?sol=${sol}&api_key=${process.env.REACT_APP_API_KEY}`
-      
-      fetch(selectedCamera === "all" ? urlAllCam : urlCam)
+      if (selectedCamera === "ALL") {
+        url = `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?sol=${sol}&api_key=${process.env.REACT_APP_API_KEY}`;
+      } else {
+        url = `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?sol=${sol}&camera=${selectedCamera}&api_key=${process.env.REACT_APP_API_KEY}`;
+      }
+
+      fetch(url)
         .then(response => response.json())
         .then(info => {
           console.log(info.photos)
@@ -60,14 +62,12 @@ const App = (props) => {
   useEffect(() => {
     setCameras([]);
     if (sol && manifest) {
-      console.log(sol)
-      console.log(manifest.photos);
       const rightSol = manifest.photos.filter(each => each.sol.toString() === sol);
       if (rightSol.length > 0) {
         console.log(rightSol[0].cameras)
         setCameras(rightSol[0].cameras);
       }
-      
+
     }
   }, [sol, manifest])
 
@@ -86,6 +86,7 @@ const App = (props) => {
         setSol={setSol}
         cameras={cameras}
         setCameras={setCameras}
+        setSelectedCamera={setSelectedCamera}
       />
       <RightSide pics={pics} />
       <Footer />
@@ -102,8 +103,6 @@ const Header = props => {
     </header>
   )
 }
-
-
 
 const RightSide = props => {
 
