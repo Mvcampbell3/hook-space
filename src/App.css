@@ -2,11 +2,11 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .container{
-  max-height: 100vh;
-  height: 100vh;
+  min-height: 100vh;
   display: grid;
   grid-template-columns: 300px auto;
   grid-template-rows: 37px auto 37px;
@@ -26,9 +26,21 @@ header, footer{
 }
 
 .leftSide{
-  background-color: black;
+  background-color: #777;
 }
 
 .rightSide{
   background-color: #555;
+}
+
+/* ---------------------------------------------------- */
+
+.picHolder{
+  display: grid;
+  grid-template-columns: 300px 300px;
+}
+
+.roverPicture{
+  width: 300px;
+  height: auto;
 }
