@@ -28,6 +28,8 @@ const App = props => {
 
   const [flipBook, setFlipBook] = useState(false);
 
+  const [regDisplay, setRegDisplay] = useState(false);
+
   // Use Effect Hooks
 
   useEffect(() => {
@@ -100,6 +102,8 @@ const App = props => {
         setSelectedCamera={setSelectedCamera}
         flipBook={flipBook}
         setFlipBook={setFlipBook}
+        regDisplay={regDisplay}
+        setRegDisplay={setRegDisplay}
       />
       <RightSide
         pics={pics}

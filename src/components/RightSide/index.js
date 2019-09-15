@@ -16,6 +16,7 @@ const RightSide = props => {
     console.log(pics.length)
     if (pics.length > 0) {
       setLoaded(loaded => loaded = 0);
+      setStash(stash => [])
       console.log("have pics")
       pics.forEach((picture, i) => {
         const newImage = new Image();
