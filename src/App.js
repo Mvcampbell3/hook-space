@@ -23,7 +23,7 @@ const Header = props => {
 const LeftSide = props => {
   return (
     <div className="leftSide">
-      <h3>{process.env.REACT_APP_API_KEY}</h3>
+      <h3></h3>
     </div>
   )
 }
