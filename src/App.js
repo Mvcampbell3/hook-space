@@ -6,7 +6,7 @@ import RightSide from "./components/RightSide";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-const App = props => {
+const App = () => {
 
   // Use State Hooks
 
@@ -30,11 +30,15 @@ const App = props => {
 
   const [regDisplay, setRegDisplay] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+
   // Use Effect Hooks
+
+  // Grabbing Pictures from http request
 
   useEffect(() => {
     if (getPics) {
-
+      setLoading(true);
       console.log("running http pictures")
 
       let url;
@@ -53,6 +57,8 @@ const App = props => {
         })
     }
   }, [getPics, rover, sol, selectedCamera])
+
+  // Grab manifest
 
   useEffect(() => {
     if (getManifest) {
@@ -74,6 +80,8 @@ const App = props => {
     }
   }, [rover, getManifest])
 
+  // Set Cameras based on sol input vs. manifest
+
   useEffect(() => {
     setCameras([]);
     setSelectedCamera(null);
@@ -88,9 +96,19 @@ const App = props => {
     }
   }, [sol, manifest])
 
+  // When selectedCamera changed, clear pics so landing in displayed on right side
+
   useEffect(() => {
     setPics([])
   }, [selectedCamera])
+
+  // Control Loading Screen display
+
+  useEffect(() => {
+    if (loading) {
+
+    }
+  })
 
   // Return Statement
 
@@ -114,11 +132,16 @@ const App = props => {
         setFlipBook={setFlipBook}
         regDisplay={regDisplay}
         setRegDisplay={setRegDisplay}
+        loading={loading}
+        setLoading={setLoading}
+        pics={pics}
       />
       <RightSide
         pics={pics}
         flipBook={flipBook}
         regDisplay={regDisplay}
+        loading={loading}
+        setLoading={setLoading}
       />
       <Footer />
     </div>

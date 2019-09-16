@@ -4,29 +4,31 @@ import Flip from "../Flip";
 
 const FlipSection = (props) => {
 
+  const { play, setPlay } = props;
+
   useEffect(() => {
     let timer;
-    if (props.play) {
-      props.setPlay(true);
+    if (play) {
+      setPlay(true);
       const pictures = [].slice.call(document.querySelectorAll(".flipPic"))
       const sortedPictures = pictures.sort((a, b) => a.id - b.id)
       let pos = 0;
       timer = setInterval(function() {
         if (pos >= sortedPictures.length) {
           clearInterval(timer);
-          props.setPlay(false)
+          setPlay(false)
         } else {
           sortedPictures.forEach(one => one.style.zIndex = "5");
           sortedPictures[pos].style.zIndex = "10";
           pos++
         }
-      }, 100)
+      }, 150)
     }
     return () => {
       clearInterval(timer);
-      props.setPlay(false)
+      setPlay(false);
     }
-  }, [props])
+  }, [play, setPlay])
 
   return (
     <div className="picFlipHolder">

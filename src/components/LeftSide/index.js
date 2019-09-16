@@ -6,7 +6,10 @@ import CameraButton from "../CameraButton";
 
 const LeftSide = props => {
 
+  const {loading, pics} =  props;
+
   const [checkButton, setCheckButton] = useState(false);
+  const [btnSelected, setBtnSelected] = useState(false);
 
   useEffect(() => {
     if (checkButton === "flip") {
@@ -19,6 +22,20 @@ const LeftSide = props => {
       setCheckButton(false)
     }
   }, [checkButton, props])
+
+  useEffect(() => {
+    console.log("running btn eval")
+    if (loading || pics.length > 0) {
+      setBtnSelected(true)
+    } else {
+      setBtnSelected(false);
+    }
+  }, [loading, pics])
+
+  const loadingTrue = () => {
+    props.setGetPics(true);
+    props.setLoading(true);
+  }
 
   return (
     <div className="leftSide">
@@ -65,12 +82,12 @@ const LeftSide = props => {
 
         {props.flipBook ?
           <div className="sendBtnBox">
-            <button onClick={() => { props.setGetPics(true) }} className="sendBtn">Get Pictures</button>
+            <button onClick={() => { loadingTrue() }} className={btnSelected ? "selected sendBtn": "sendBtn"}>Get Pictures</button>
           </div>
           : null}
         {props.regDisplay ?
           <div className="sendBtnBox">
-            <button onClick={() => { props.setGetPics(true) }} className="sendBtn">Get Pictures</button>
+            <button onClick={() => { loadingTrue() }} className={btnSelected ? "selected sendBtn": "sendBtn"}>Get Pictures</button>
           </div>
           : null}
       </div>
