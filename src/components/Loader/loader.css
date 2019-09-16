@@ -1,0 +1,28 @@
+.loaderHolder {
+  width: 350px;
+  height: 350px;
+  display: grid;
+  place-items: center center;
+  position: relative;
+}
+
+.circle {
+  height: 100px;
+  width: 100px;
+  background-color: yellow;
+  border-radius: 50%;
+  display: grid;
+  place-items: center center;
+  color: darkred;
+  position: relative;
+  z-index: 3;
+}
+
+.mars {
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  background-color: red;
+  border-radius: 50%;
+  z-index: 5;
+}

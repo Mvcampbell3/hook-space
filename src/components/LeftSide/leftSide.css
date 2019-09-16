@@ -24,6 +24,7 @@
   text-align: center;
   padding: 1px;
   border-radius: 5px;
+  border: 1px darkred solid;
 }
 
 .cameraButtons{

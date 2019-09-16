@@ -22,8 +22,6 @@ const LeftSide = props => {
 
   return (
     <div className="leftSide">
-      <h3 className="text-center">Get Rover Pictures</h3>
-
       <div className="controlBox">
         <h5 className="text-center">Select Rover</h5>
         <div className="rover-button-group">

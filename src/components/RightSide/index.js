@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 import Picture from "../Picture";
 import Flip from "../Flip";
 
+import Loader from "../Loader";
+import Landing from "../Landing";
+
 
 const RightSide = props => {
 
@@ -48,13 +51,13 @@ const RightSide = props => {
       const sortedPictures = pictures.sort((a, b) => a.id - b.id)
       // console.log(sortedPictures);
       let pos = 0;
-      const timer = setInterval(function(){
+      const timer = setInterval(function() {
         if (pos >= sortedPictures.length) {
           clearInterval(timer);
           setPlay(false)
         } else {
           sortedPictures.forEach(one => one.style.zIndex = "5");
-          sortedPictures[pos].style.zIndex="10";
+          sortedPictures[pos].style.zIndex = "10";
           pos++
         }
       }, 100)
@@ -68,23 +71,37 @@ const RightSide = props => {
         <>
           {props.regDisplay ?
             <>
-              <div className="picRegHolder">
-                {loaded === pics.length ? stash.map((image, i) => <Picture img_src={image.src} id={image.id} key={i} />) : <h3>Loading...</h3>}
-              </div>
-            </> : <></>}
+              {loaded === pics.length ?
+                <div className="picRegHolder">
+                  {stash.map(
+                    (image, i) => <Picture img_src={image.src} id={image.id} key={i} />)}
+                </div>
+                :
+                <div className="oneGrid"><Loader /></div>}
+            </> : null}
+
           {props.flipBook ? <>
-            <div className="picFlipHolder">
-                {loaded === pics.length ? <Flip blocker={true} />: null}
-                {loaded === pics.length ? stash.map((image, i) => <Flip img_src={image.src} id={image.id} place={i} key={i} blocker={false} />): <h3>Loading Flip...</h3>}
-                {loaded === pics.length ? 
-                <div className="flipControl">
-                  <button onClick={() => setPlay(true)} className={play ? "selected": ""}>Play</button>
-                </div> : null
-                }
-            </div>
+            <>
+              {loaded === pics.length ?
+
+                <div className="flipPlace">
+
+                  <div className="picFlipHolder">
+                    <Flip blocker={true} />
+                    {stash.map((image, i) =>
+                      <Flip img_src={image.src} id={image.id} place={i} key={i} blocker={false} />)
+                    }
+                    <div className="flipControl">
+                      <button onClick={() => setPlay(true)} className={play ? "selected" : ""}>Play</button>
+                    </div>
+
+                  </div>
+
+                </div> : <div className="oneGrid"><Loader /></div>}
+            </>
           </> : <></>}
         </>
-        : <>Pictures will be here...</>}
+        : <div className="oneGrid"><Landing /></div>}
     </div>
   )
 }
