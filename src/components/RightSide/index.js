@@ -6,6 +6,8 @@ import Flip from "../Flip";
 import Loader from "../Loader";
 import Landing from "../Landing";
 
+import FlipSection from "../FlipSection";
+
 
 const RightSide = props => {
 
@@ -16,28 +18,6 @@ const RightSide = props => {
   let [stash, setStash] = useState([]);
 
   const [play, setPlay] = useState(false);
-
-  let timer;
-
-  const testFunction = () => {
-    console.log(play);
-    if (!play) {
-      setPlay(true);
-      const pictures = [].slice.call(document.querySelectorAll(".flipPic"))
-      const sortedPictures = pictures.sort((a, b) => a.id - b.id)
-      let pos = 0;
-      timer = setInterval(function() {
-        if (pos >= sortedPictures.length) {
-          clearInterval(timer);
-          setPlay(false)
-        } else {
-          sortedPictures.forEach(one => one.style.zIndex = "5");
-          sortedPictures[pos].style.zIndex = "10";
-          pos++
-        }
-      }, 100)
-    }
-  }
 
   useEffect(() => {
     if (pics.length > 0) {
@@ -60,16 +40,6 @@ const RightSide = props => {
 
   }, [pics])
 
-  useEffect(() => {
-    if (play) {
-      return clearInterval(timer);
-    }
-  }, [play, timer])
-
-  useEffect(() => {
-    return setPlay(play => play = false);
-  }, [])
-
   return (
     <div className="rightSide">
       {pics.length > 0 ?
@@ -89,9 +59,17 @@ const RightSide = props => {
             <>
               {loaded === pics.length ?
 
-                <div className="flipPlace">
 
-                  <div className="picFlipHolder">
+                <div className="flipPlace">
+                  <FlipSection
+                    stash={stash}
+                    // testFunction={testFunction}
+                    play={play}
+                    setPlay={setPlay}
+                  />
+
+
+                  {/* <div className="picFlipHolder">
                     <Flip blocker={true} />
                     {stash.map((image, i) =>
                       <Flip img_src={image.src} id={image.id} place={i} key={i} blocker={false} />)
@@ -100,7 +78,7 @@ const RightSide = props => {
                       <button onClick={play ? null : () => testFunction()} className={play ? "selected" : ""}>Play</button>
                     </div>
 
-                  </div>
+                  </div> */}
 
                 </div> : <div className="oneGrid"><Loader /></div>}
             </>
