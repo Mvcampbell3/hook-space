@@ -12,7 +12,7 @@
   background: url("../../images/mars.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  background-position-y: -400px;
+  background-position:center;
   background-blend-mode: difference;
   background-color: rgb(185, 63, 41);
   display: grid;

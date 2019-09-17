@@ -63,3 +63,51 @@
 .disBtns button:nth-child(1) {
   margin-right: 10px;
 }
+
+@media (max-width: 1000px) {
+  .controlBox{
+    width: 100%;
+    height: 150px;
+    display: grid;
+    padding: 0;
+    margin: 0;
+    grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
+    column-gap: 5px;
+    align-items: center;
+  }
+
+  .cameraButtons{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2px;
+  }
+
+  .controlTitle{
+    margin: 0;
+  }
+
+  .sendBtnBox{
+    margin: 0;
+  }
+
+  .displayButtons{
+    border-bottom: none;
+  }
+
+  .disBtns, .rover-button-group{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .disBtns button:nth-child(1) {
+    margin-right: 0px;
+    margin-bottom: 2px;
+  }
+
+  .rover-button-group .roverBtn:nth-child(1) {
+    margin-right: 0px;
+    margin-bottom: 2px
+  }
+} 

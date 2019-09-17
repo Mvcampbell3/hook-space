@@ -129,3 +129,20 @@ header{
   width: fit-content;
   border-radius: 5px;
 }
+
+@media (max-width: 1000px) {
+  .container{
+    grid-template-columns: 1fr;
+    grid-template-rows: 59.2px 150px auto;
+  }
+
+  header{
+    grid-column-end: 2;
+    text-align: center;
+    text-indent: 0px;
+  }
+
+  .leftSide{
+    height: 200px;
+  }
+}

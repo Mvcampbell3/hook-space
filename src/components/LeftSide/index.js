@@ -40,39 +40,45 @@ const LeftSide = props => {
   return (
     <div className="leftSide">
       <div className="controlBox">
-        <h5 className="text-center controlTitle">Select Rover</h5>
-        <div className="rover-button-group">
-          <button
-            onClick={() => {
-              props.setRover("opportunity");
-              props.setGetManifest(true);
-            }}
-            className={props.rover === "opportunity" ? "roverBtn selected" : "roverBtn"}>Opportunity</button>
-          <button
-            onClick={() => {
-              props.setRover("spirit");
-              props.setGetManifest(true);
-            }}
-            className={props.rover === "spirit" ? "roverBtn selected" : "roverBtn"}>Spirit</button>
+        <div className="inputBox">
+          <h5 className="text-center controlTitle">Select Rover</h5>
+          <div className="rover-button-group">
+            <button
+              onClick={() => {
+                props.setRover("opportunity");
+                props.setGetManifest(true);
+              }}
+              className={props.rover === "opportunity" ? "roverBtn selected" : "roverBtn"}>Opportunity</button>
+            <button
+              onClick={() => {
+                props.setRover("spirit");
+                props.setGetManifest(true);
+              }}
+              className={props.rover === "spirit" ? "roverBtn selected" : "roverBtn"}>Spirit</button>
 
+          </div>
         </div>
 
+
         {props.manifest ?
-          <div className="solBox">
+          <div className="solBox inputBox">
             <h5 className="text-center controlTitle">Max Sol: {props.manifest.max_sol}</h5>
             <input placeholder="Enter Sol..." type="number" name="sol" autoComplete="off" onChange={e => props.setSol(e.target.value)} value={props.sol} />
           </div> : <></>}
 
         {props.cameras.length > 0 ?
-          <div className="cameraButtons">
+          <div className="cameraHolder inputBox">
             <h5 className="text-center controlTitle">Select Cameras</h5>
-            <CameraButton key="allCamera" cam={"ALL"} setSelectedCamera={props.setSelectedCamera} selectedCamera={props.selectedCamera} />
-            {props.cameras.map((cam, i) => <CameraButton key={i} cam={cam} setSelectedCamera={props.setSelectedCamera} selectedCamera={props.selectedCamera} />)}
-          </div> : <></>}
+            <div className="cameraButtons">
+              <CameraButton key="allCamera" cam={"ALL"} setSelectedCamera={props.setSelectedCamera} selectedCamera={props.selectedCamera} />
+              {props.cameras.map((cam, i) => <CameraButton key={i} cam={cam} setSelectedCamera={props.setSelectedCamera} selectedCamera={props.selectedCamera} />)}
+            </div>
+          </div>
+          : <></>}
 
 
         {props.selectedCamera ?
-          <div className="displayButtons">
+          <div className="displayButtons inputBox">
             <h5 className="text-center controlTitle">Select Display</h5>
             <div className="disBtns">
               <button onClick={() => setCheckButton("reg")} data-which="reg" className={props.regDisplay ? "selected" : ""}>Side by Side</button>
@@ -83,12 +89,12 @@ const LeftSide = props => {
 
 
         {props.flipBook ?
-          <div className="sendBtnBox">
+          <div className="sendBtnBox inputBox">
             <button onClick={() => { loadingTrue() }} className={btnSelected ? "selected sendBtn" : "sendBtn"}>Get Pictures</button>
           </div>
           : null}
         {props.regDisplay ?
-          <div className="sendBtnBox">
+          <div className="sendBtnBox inputBox">
             <button onClick={() => { loadingTrue() }} className={btnSelected ? "selected sendBtn" : "sendBtn"}>Get Pictures</button>
           </div>
           : null}
