@@ -4,7 +4,6 @@ import './App.css';
 import LeftSide from "./components/LeftSide";
 import RightSide from "./components/RightSide";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 
 const App = () => {
 
@@ -143,7 +142,6 @@ const App = () => {
         loading={loading}
         setLoading={setLoading}
       />
-      <Footer />
     </div>
   );
 }

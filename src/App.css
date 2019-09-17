@@ -12,13 +12,12 @@
 .container{
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 300px auto;
-  grid-template-rows: 37px auto 37px;
-  background-color: rgb(153, 153, 153);
+  grid-template-columns: 400px auto;
+  grid-template-rows: 59.2px auto;
 }
 
 button{
-  padding: 2px 4px;
+  padding: 4px 8px;
   background-color: black;
   color: white;
   border: 1px darkred solid;
@@ -30,19 +29,36 @@ button:focus{
   outline: none;
 }
 
-.selected{
+button:hover{
   background-color: white;
   color: black;
+}
+
+.selected:hover{
+  background-color: red;
+  color: white;
+}
+
+.selected{
+  background-color: red;
+  color: white;
   transform: scale(0.95);
   transition: all, .25s;
 }
 
-header, footer{
+header{
   grid-column-start: 1;
   grid-column-end: span 2;
-  text-align: center;
-  align-self: center;
-  color: black;
+  background-color: black;
+  text-indent: 230px;
+  padding: 10px;
+  border-bottom: .25px darkred solid;
+}
+
+.brand{
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: rgb(196, 0, 0);
+  letter-spacing: 1.5px;
 }
 
 .leftSide, .rightSide{
@@ -50,12 +66,12 @@ header, footer{
 }
 
 .leftSide{
-  background-color: #ccc;
-  padding-top: 100px;
+  border-right: 2px darkred solid;
+  background-color: #777;
 }
 
 .rightSide{
-  background: linear-gradient(100deg, rgb(8, 8, 109), rgb(8, 0, 39));
+  background-color: whitesmoke;
 }
 
 .oneGrid{
@@ -85,7 +101,7 @@ header, footer{
   position: relative;
   width: 400px;
   margin: auto;
-  transform: translateY(25px);
+  transform: translateY(32px);
 }
 
 .flipPic{
