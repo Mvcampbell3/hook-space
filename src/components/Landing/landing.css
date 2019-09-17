@@ -5,3 +5,16 @@
   margin: 0 auto;
   border-radius: 5px;
 }
+
+.bgLanding{
+  height: 100%;
+  width: 100%;
+  background: url("../../images/mars.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-y: -400px;
+  background-blend-mode: difference;
+  background-color: rgb(185, 63, 41);
+  display: grid;
+  place-items: center center;
+}
